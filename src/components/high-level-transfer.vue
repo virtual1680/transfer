@@ -25,10 +25,7 @@
               @row-click="lToggleSelection"
               @selection-change="leftSelectionChange" size="small" :data="leftData1" style="width: 100%" height="400">
               <el-table-column type="selection" width="45"></el-table-column>
-              <el-table-column fixed prop="realName" label="姓名" width="70"></el-table-column>
-              <el-table-column prop="phoneNo" label="电话"  width="100"></el-table-column>
-              <el-table-column prop="roleName" label="角色"  width="100"></el-table-column>
-              <el-table-column prop="duty" label="职务"></el-table-column>
+              <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width"></el-table-column>
             </el-table>
           </div>
           <div style="padding: 10px 10px 0 10px">
@@ -72,10 +69,10 @@
               @row-click="rToggleSelection"
               @selection-change="rightSelectionChange" size="small" :data="rightData1" style="width: 100%" height="400">
               <el-table-column type="selection" width="45"></el-table-column>
-              <el-table-column fixed prop="realName" label="姓名" width="70"></el-table-column>
-              <el-table-column prop="phoneNo" label="电话"  width="100"></el-table-column>
-              <el-table-column prop="roleName" label="角色"  width="100"></el-table-column>
-              <el-table-column prop="duty" label="职务"></el-table-column>
+              <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width"></el-table-column>
+              <!--<el-table-column prop="phoneNo" label="电话"  width="100"></el-table-column>-->
+              <!--<el-table-column prop="roleName" label="角色"  width="100"></el-table-column>-->
+              <!--<el-table-column prop="duty" label="职务"></el-table-column>-->
             </el-table>
           </div>
           <div style="padding: 10px 10px 0 10px">
@@ -125,6 +122,7 @@
   export default {
     name: 'index',
     props:{
+      columnDate:{type:Array},//表数据列的渲染
       leftData:{type:Array},//接收左边数据
       rightData:{type:Array},//接收左边数据
       selectData:{type:Array},//接收select数据
@@ -134,34 +132,34 @@
     },
     watch: {
       leftData: {
-          handler(newValue, _){
+          handler(newValue){
              this.leftData1 = newValue
           },
           deep:true
       },
       rightData: {
-        handler(newValue, _){
+        handler(newValue){
 
           this.rightData1 = newValue
         },
         deep:true
       },
       rTotalPage: {
-        handler(newValue, _){
+        handler(newValue){
           console.log(newValue)
           this.rTotalPage = newValue
         },
         deep:true
       },
       lTotalPage: {
-        handler(newValue, _){
+        handler(newValue){
           console.log(newValue)
           this.lTotalPage = newValue
         },
         deep:true
       },
       pageSize: {
-        handler(newValue, _){
+        handler(newValue){
           this.pageSize = newValue
         },
         deep:true
