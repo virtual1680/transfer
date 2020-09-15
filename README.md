@@ -2,9 +2,9 @@
 
 ## Project setup
 基于element-ui,自定义穿梭框，带下拉，输入框搜索分页
-
-<HighLevelTransfer ```
-    @page-change="listenerPageChange" ```
+```
+<HighLevelTransfer
+    @page-change="listenerPageChange" 
     @select-input-search="listenerSelectInputSearch"
     @data-change="listenerDataChange"
     :columnDate="columnDate"
