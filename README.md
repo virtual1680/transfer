@@ -4,7 +4,7 @@
 基于element-ui,自定义穿梭框，带下拉，输入框搜索分页
 
 ###安装
-
+npm https://www.npmjs.com/package/q-transfer
 ```
 npm install element-ui
 npm install q-transfer
@@ -68,7 +68,6 @@ Vue.use(QTransfer);
   },
 ```
 ### 图片
-npm https://www.npmjs.com/package/q-transfer
 https://github.com/QinHongYang/transfer/blob/master/WeChat425f555c9c4114b679e07c56dcdabbed.png?raw=true
 
 ### Customize configuration
