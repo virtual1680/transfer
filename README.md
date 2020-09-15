@@ -52,6 +52,7 @@
   },
 
 ```
+https://github.com/QinHongYang/transfer/blob/master/WeChat425f555c9c4114b679e07c56dcdabbed.png?raw=true
 yarn install
 ```
 
