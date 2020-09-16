@@ -1,7 +1,7 @@
 {
   "name": "q-transfer",
   "description": "基于element-ui自定义的穿梭框",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "itperson <772622542@qq.com>",
   "license": "MIT",
   "private": false,

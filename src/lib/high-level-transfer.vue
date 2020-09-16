@@ -9,10 +9,10 @@
         <div class="left-middle">
           <div style="padding:0 10px 10px 10px">
             <el-row>
-              <el-col style="padding-right: 10px" :span="16">
+              <el-col :style="selectData.length>0?'padding-right: 10px':''" :span="selectData.length>0?16:24">
                 <el-input @input="leftInputSearch" size="small" placeholder="请输入姓名" v-model="leftSearchValue" clearable></el-input>
               </el-col>
-              <el-col :span="8">
+              <el-col v-if="selectData.length>0" :span="8">
                 <el-select @change="leftSelectChange" size="small" v-model="leftSelectValue" placeholder="请选择" :value="leftSelectValue">
                   <el-option v-for="item in selectData" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
@@ -25,7 +25,12 @@
               @row-click="lToggleSelection"
               @selection-change="leftSelectionChange" size="small" :data="leftData1" style="width: 100%" height="400">
               <el-table-column type="selection" width="45"></el-table-column>
-              <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width"></el-table-column>
+              <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width">
+                <template slot-scope="scope">
+                  <slot :name="item.prop" v-if="item.custom" :data="scope['row']"></slot>
+                  <div v-else>{{scope.row[''+item.prop]}}</div>
+                </template>
+              </el-table-column>
             </el-table>
           </div>
           <div style="padding: 10px 10px 0 10px">
@@ -53,10 +58,10 @@
         <div class="right-middle">
           <div style="padding:0 10px 10px 10px">
             <el-row>
-              <el-col style="padding-right: 10px" :span="16">
+              <el-col :style="selectData.length>0?'padding-right: 10px':''" :span="selectData.length>0?16:24">
                 <el-input @input="rightInputSearch" size="small" placeholder="请输入姓名" v-model="rightSearchValue" clearable></el-input>
               </el-col>
-              <el-col :span="8">
+              <el-col v-if="selectData.length>0" :span="8">
                 <el-select @change="rightSelectChange" size="small" v-model="rightSelectValue" placeholder="请选择" :value="rightSelectValue">
                   <el-option v-for="item in selectData" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
@@ -69,10 +74,12 @@
               @row-click="rToggleSelection"
               @selection-change="rightSelectionChange" size="small" :data="rightData1" style="width: 100%" height="400">
               <el-table-column type="selection" width="45"></el-table-column>
-              <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width"></el-table-column>
-              <!--<el-table-column prop="phoneNo" label="电话"  width="100"></el-table-column>-->
-              <!--<el-table-column prop="roleName" label="角色"  width="100"></el-table-column>-->
-              <!--<el-table-column prop="duty" label="职务"></el-table-column>-->
+              <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width">
+                <template slot-scope="scope">
+                  <slot :name="item.prop" v-if="item.custom" :data="scope['row']"></slot>
+                  <div v-else>{{scope.row[''+item.prop]}}</div>
+                </template>
+              </el-table-column>
             </el-table>
           </div>
           <div style="padding: 10px 10px 0 10px">

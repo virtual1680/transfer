@@ -12,7 +12,13 @@
           :lTotalPage="lTotalPage"
           :leftData="leftData"
           :rightData="rightData"
-          :selectData="options"/>
+          :selectData="options">
+          <template slot="roleName" slot-scope="scope">
+            <div>
+              {{scope.data.roleName=='1'?'高手':'低手'}}
+            </div>
+          </template>
+        </HighLevelTransfer>
       </el-dialog>
     </div>
 </template>
@@ -30,13 +36,14 @@ export default {
       tableData: [],
       rTotalPage:0,
       lTotalPage:0,
-      leftData:[{id:'1',realName:'11111',phoneNo:'1234567809',roleName:'和借款方达还是靠',duty:'发电机房间'}],
-      rightData:[{id:'1',realName:'11111',phoneNo:'1234567809',roleName:'和借款方达还是靠',duty:'发电机房间'}],
+      options:[],
+      leftData:[{id:'1',realName:'11111',phoneNo:'1234567809',roleName:'1',duty:'发电机房间'}],
+      rightData:[{id:'1',realName:'22222',phoneNo:'1234567809',roleName:'2',duty:'发电机房间'}],
       columnDate:[
-        {fixed:true,prop:'realName',label:'姓名',width:70},
-        {fixed:false,prop:'phoneNo',label:'电话',width:100},
-        {fixed:false,prop:'roleName',label:'角色',width:100},
-        {fixed:false,prop:'duty',label:'职务',width:100}
+        {fixed:true,prop:'realName',label:'姓名',width:70,custom:false},
+        {fixed:false,prop:'phoneNo',label:'电话',width:100,custom:false},
+        {fixed:false,prop:'roleName',label:'角色',width:100,custom:true},
+        {fixed:false,prop:'duty',label:'职务',width:100,custom:false}
       ]
     }
   },
