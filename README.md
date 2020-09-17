@@ -105,6 +105,6 @@ Vue.use(QTransfer);
     }
 ```
 ### 图片
-![Alt text](https://github.com/QinHongYang/transfer/blob/master/WeChat425f555c9c4114b679e07c56dcdabbed.png)
+![Alt text](https://github.com/QinHongYang/transfer/blob/master/WeChat425f555c9c4114b679e07c56dcdabbed.png?raw=true)
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
