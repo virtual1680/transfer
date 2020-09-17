@@ -51,22 +51,6 @@ Vue.use(QTransfer);
       </template>
     </q-transfer>
 --------------start----------
-  fun listenerPageChange(page,type)
-      params:
-        1.page is current change page;
-        2.type is left or right
-
-  fun listenerSelectInputSearch(selectVal,inputVal,type)
-      params:
-        1.selectVal is select value
-        2.inputVal is input value
-        3.type is left or left
-
-  fun listenerDataChange(selectVal,inputVal,type)
-      params:
-        1.selectVal is select value
-        2.inputVal is input value
-        3.type is left or left
   pageSize：paging query page num size
   columnDate：表头列的数据key
       1.如果需要自定义某一列，将 columnDate 中 custom 字段设置为true（列如：角色）
@@ -104,9 +88,13 @@ Vue.use(QTransfer);
       },
     }
 ```
+### 事件
 | 回调方法 | 返回参数 | 参数类型 | 触发说明 | 返回说明 |
 |-------|-------|---------|-------|-------|
-| `page-change` | `(page,type)` | `(int,string)` | 点击左or右的分页页数 | 返回(页数)和(左 or 右) |
+| `@page-change` | `(page,type)` | `(int,string)` | 点击左or右的分页页数 | 返回(页数,left or right) |
+| `@select-input-search` | `(selectVal,inputVal,type)` | `(any,string,string)` | 输入框输入及下拉选择(左or右) | 返回(下拉选中值,输入框值,left or right) |
+| `@data-change` | `(val,type)` | `([],string)` | 选中数据左移或右移 | 返回(选中的数据,left-to-right or right-to-left) |
+
 ### 图片
 ![Alt text](https://github.com/QinHongYang/transfer/blob/master/WechatIMG26.png?raw=true)
 ### Customize configuration
