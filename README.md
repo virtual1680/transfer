@@ -94,7 +94,7 @@ Vue.use(QTransfer);
 | `lTotalPage` | `number` | 左边表数据的总数(1.不需要分页时则传当前数据的长度即可) |
 | `leftData` | `[]` | 左边表数据(1.字段需要与columnDate中prop的值一致) |
 | `rightData` | `[]` | 右边表数据(1.字段需要与columnDate中prop的值一致) |
-| `selectData` | `[]` | 左右下拉框的数据 |
+| `selectData` | `[]` | 左右下拉框的数据(1.传[]则不显示下拉框) |
 | `pageSize` | `number` | 每一页的页数大小(1.默认100。2.不需要分页时传10000) |
 ### 图片
 ![Alt text](https://github.com/QinHongYang/transfer/blob/master/WechatIMG26.png?raw=true)
