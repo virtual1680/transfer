@@ -51,12 +51,10 @@ Vue.use(QTransfer);
       </template>
     </q-transfer>
 --------------start----------
-  pageSize：paging query page num size
   columnDate：表头列的数据key
       1.如果需要自定义某一列，将 columnDate 中 custom 字段设置为true（列如：角色）
         a.然后在QTransfer中写入template（注意slot="roleName"的roleName要与columnDate中的prop的值一致）
       2.fixed 属性将该列定位（效果：不能左右滚动）
-  selectData：传[]则不显示下拉选择框
 -----------end-------------
   data(){
     return {
@@ -94,7 +92,19 @@ Vue.use(QTransfer);
 | `@page-change` | `(page,type)` | `(int,string)` | 点击左or右的分页页数 | (页数,left or right) |
 | `@select-input-search` | `(selectVal,inputVal,type)` | `(any,string,string)` | 输入框输入及下拉选择(左or右) | (下拉选中值,输入框值,left or right) |
 | `@data-change` | `(val,type)` | `([],string)` | 选中数据左移或右移 | (选中的数据,left-to-right or right-to-left) |
-
+### 参数
+| 参数名 | 参数类型 | 说明及注意事项 |
+|-------|-------|-----------------------------|
+| `columnDate` | `[]` | 表头渲染数据(
+1.fixed为true是当前列不能滑动，
+2.custom表示是否能自定义 
+3.custom为true时(角色为例)，可在QTransfer中写入template（注意slot="roleName"的roleName要与columnDate中的prop的值一致）) |
+| `rTotalPage` | `number` | 右边表数据的总数(1.不需要分页时则传当前数据的长度即可) |
+| `lTotalPage` | `number` | 左边表数据的总数(1.不需要分页时则传当前数据的长度即可) |
+| `leftData` | `[]` | 左边表数据(1.字段需要与columnDate中prop的值一致) |
+| `rightData` | `[]` | 右边表数据(1.字段需要与columnDate中prop的值一致) |
+| `selectData` | `[]` | 左右下拉框的数据 |
+| `pageSize` | `number` | 每一页的页数大小(1.默认100。2.不需要分页时传10000) |
 ### 图片
 ![Alt text](https://github.com/QinHongYang/transfer/blob/master/WechatIMG26.png?raw=true)
 ### Customize configuration
