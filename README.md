@@ -51,6 +51,9 @@ Vue.use(QTransfer);
       </template>
     </q-transfer>
 --------------start----------
+| 方法名 | 调用 | 参数类型 | 默认参数 | 说明 |
+|-------|-------|---------|-------|-------|
+| `listenerPageChange` | `listenerPageChange(page,type)` | `1.page is current change page;\n 2.type is left or right` | (int,string) | 返回(页数)和(左 or 右) |
   fun listenerPageChange(page,type)
       params:
         1.page is current change page;
