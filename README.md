@@ -51,9 +51,6 @@ Vue.use(QTransfer);
       </template>
     </q-transfer>
 --------------start----------
-| 方法名 | 调用 | 参数类型 | 默认参数 | 说明 |
-|-------|-------|---------|-------|-------|
-| `listenerPageChange` | `listenerPageChange(page,type)` | `1.page is current change page;\n 2.type is left or right` | (int,string) | 返回(页数)和(左 or 右) |
   fun listenerPageChange(page,type)
       params:
         1.page is current change page;
@@ -107,6 +104,9 @@ Vue.use(QTransfer);
       },
     }
 ```
+| 方法名 | 调用 | 参数类型 | 默认参数 | 说明 |
+|-------|-------|---------|-------|-------|
+| `listenerPageChange` | `listenerPageChange(page,type)` | `1.page is current change page;\n 2.type is left or right` | (int,string) | 返回(页数)和(左 or 右) |
 ### 图片
 ![Alt text](https://github.com/QinHongYang/transfer/blob/master/WechatIMG26.png?raw=true)
 ### Customize configuration
