@@ -50,12 +50,6 @@ Vue.use(QTransfer);
         </div>
       </template>
     </q-transfer>
---------------start----------
-  columnDate：表头列的数据key
-      1.如果需要自定义某一列，将 columnDate 中 custom 字段设置为true（列如：角色）
-        a.然后在QTransfer中写入template（注意slot="roleName"的roleName要与columnDate中的prop的值一致）
-      2.fixed 属性将该列定位（效果：不能左右滚动）
------------end-------------
   data(){
     return {
         rTotalPage:0,//右边数据的总条数
@@ -95,10 +89,7 @@ Vue.use(QTransfer);
 ### 参数
 | 参数名 | 参数类型 | 说明及注意事项 |
 |-------|-------|-----------------------------|
-| `columnDate` | `[]` | 表头渲染数据(
-1.fixed为true是当前列不能滑动，
-2.custom表示是否能自定义 
-3.custom为true时(角色为例)，可在QTransfer中写入template（注意slot="roleName"的roleName要与columnDate中的prop的值一致）) |
+| `columnDate` | `[]` | 表头渲染数据(1.fixed为true是当前列不能滑动，2.custom表示是否能自定义 3.custom为true时(角色为例)，可在QTransfer中写入template（注意slot="roleName"的roleName要与columnDate中的prop的值一致）) |
 | `rTotalPage` | `number` | 右边表数据的总数(1.不需要分页时则传当前数据的长度即可) |
 | `lTotalPage` | `number` | 左边表数据的总数(1.不需要分页时则传当前数据的长度即可) |
 | `leftData` | `[]` | 左边表数据(1.字段需要与columnDate中prop的值一致) |
