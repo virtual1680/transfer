@@ -19,7 +19,7 @@ Vue.use(ElementUI);
 Vue.use(QTransfer);
 
 //简单使用
-<QTransfer
+<q-transfer
     @page-change="listenerPageChange"
     @select-input-search="listenerSelectInputSearch"
     @data-change="listenerDataChange"
@@ -30,10 +30,10 @@ Vue.use(QTransfer);
     :rightData="rightData"
     :selectData="options"
     :pageSize="50"
-  />
+  ></q-transfer>
 
 //自定义使用
-  <QTransfer
+  <q-transfer
       @page-change="listenerPageChange"
       @select-input-search="listenerSelectInputSearch"
       @data-change="listenerDataChange"
@@ -49,7 +49,7 @@ Vue.use(QTransfer);
           {{scope.data.roleName=='1'?'高手':'低手'}}
         </div>
       </template>
-    </QTransfer>
+    </q-transfer>
 --------------start----------
   fun listenerPageChange(page,type)
       params:
