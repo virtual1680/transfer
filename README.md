@@ -104,9 +104,9 @@ Vue.use(QTransfer);
       },
     }
 ```
-| 方法名 | 调用 | 参数类型 | 默认参数 | 说明 |
+| 回调方法 | 返回参数 | 参数类型 | 触发说明 | 返回说明 |
 |-------|-------|---------|-------|-------|
-| `listenerPageChange` | `listenerPageChange(page,type)` | `1.page is current change page;\n 2.type is left or right` | (int,string) | 返回(页数)和(左 or 右) |
+| `page-change` | `(page,type)` | `(int,string)` | 点击左or右的分页页数 | 返回(页数)和(左 or 右) |
 ### 图片
 ![Alt text](https://github.com/QinHongYang/transfer/blob/master/WechatIMG26.png?raw=true)
 ### Customize configuration
