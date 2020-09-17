@@ -7,8 +7,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './'),
     publicPath: '/',
-    filename: 'transfer-index.js',
-    library: 'transfer-index',
+    filename: 'q-transfer.js',
+    library: 'q-transfer',
     libraryTarget: "umd",
     umdNamedDefine: true
   },

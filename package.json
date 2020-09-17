@@ -1,11 +1,11 @@
 {
   "name": "q-transfer",
   "description": "基于element-ui自定义的穿梭框",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "author": "itperson <772622542@qq.com>",
   "license": "MIT",
   "private": false,
-  "main": "./transfer-index.js",
+  "main": "./q-transfer.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"

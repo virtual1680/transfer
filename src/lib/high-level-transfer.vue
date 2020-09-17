@@ -92,7 +92,7 @@
 </template>
 <script>
   export default {
-    name: 'transfer-index',
+    name: 'q-transfer',
     props:{
       columnDate:{type:Array},//表数据列的渲染
       leftData:{type:Array},//接收左边数据
