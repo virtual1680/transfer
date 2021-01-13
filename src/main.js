@@ -1,9 +1,11 @@
-import Vue from 'vue'
+import {createApp } from 'vue';
 import App from './App.vue'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUI);
-new Vue({
-  el: '#app',
-  render: h => h(App)
-})
+import ElementPlus from 'element-plus';
+import 'element-plus/lib/theme-chalk/index.css';
+// import qTransfer from '../lib/q-transfer.js';
+import qTransfer from './lib/index';
+const app = createApp(App);
+app.use(ElementPlus);
+app.use(qTransfer);
+app.mount('#app');
+

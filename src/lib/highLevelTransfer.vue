@@ -4,16 +4,16 @@
       <div class="left-box-card">
         <div class="left-title">
           <span>待选列表</span>
-          <span style="float: right;color: #bbbbbb;">{{leftDataIng.length}}/{{leftData1.length}}项</span>
+          <span style="float: right;color: #bbbbbb;">{{state.leftDataIng.length}}/{{leftData.length}}项</span>
         </div>
         <div class="left-middle">
           <div style="padding:0 10px 10px 10px">
             <el-row>
               <el-col :style="selectData.length>0?'padding-right: 10px':''" :span="selectData.length>0?16:24">
-                <el-input @input="leftInputSearch" size="small" placeholder="请输入姓名" v-model="leftSearchValue" clearable></el-input>
+                <el-input @input="leftInputSearch" size="small" placeholder="请输入姓名" v-model="state.leftSearchValue" clearable></el-input>
               </el-col>
               <el-col v-if="selectData.length>0" :span="8">
-                <el-select @change="leftSelectChange" size="small" v-model="leftSelectValue" placeholder="请选择" :value="leftSelectValue">
+                <el-select @change="leftSelectChange" size="small" v-model="state.leftSelectValue" placeholder="请选择" :value="state.leftSelectValue">
                   <el-option v-for="item in selectData" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
               </el-col>
@@ -23,10 +23,10 @@
             <el-table
               ref="lMultipleTable"
               @row-click="lToggleSelection"
-              @selection-change="leftSelectionChange" size="small" :data="leftData1" style="width: 100%" height="400">
+              @selection-change="leftSelectionChange" size="small" :data="leftData" style="width: 100%" height="400">
               <el-table-column type="selection" width="45"></el-table-column>
               <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width">
-                <template slot-scope="scope">
+                <template v-slot="scope">
                   <slot :name="item.prop" v-if="item.custom" :data="scope['row']"></slot>
                   <div v-else>{{scope.row[''+item.prop]}}</div>
                 </template>
@@ -53,16 +53,16 @@
       <div class="right-box-card">
         <div class="right-title">
           <span>已选列表</span>
-          <span style="float: right;color: #bbbbbb;">{{rightDataIng.length}}/{{rightData1.length}}项</span>
+          <span style="float: right;color: #bbbbbb;">{{state.rightDataIng.length}}/{{rightData.length}}项</span>
         </div>
         <div class="right-middle">
           <div style="padding:0 10px 10px 10px">
             <el-row>
               <el-col :style="selectData.length>0?'padding-right: 10px':''" :span="selectData.length>0?16:24">
-                <el-input @input="rightInputSearch" size="small" placeholder="请输入姓名" v-model="rightSearchValue" clearable></el-input>
+                <el-input @input="rightInputSearch" size="small" placeholder="请输入姓名" v-model="state.rightSearchValue" clearable></el-input>
               </el-col>
               <el-col v-if="selectData.length>0" :span="8">
-                <el-select @change="rightSelectChange" size="small" v-model="rightSelectValue" placeholder="请选择" :value="rightSelectValue">
+                <el-select @change="rightSelectChange" size="small" v-model="state.rightSelectValue" placeholder="请选择" :value="state.rightSelectValue">
                   <el-option v-for="item in selectData" :key="item.value" :label="item.label" :value="item.value"></el-option>
                 </el-select>
               </el-col>
@@ -72,10 +72,10 @@
             <el-table
               ref="rMultipleTable"
               @row-click="rToggleSelection"
-              @selection-change="rightSelectionChange" size="small" :data="rightData1" style="width: 100%" height="400">
+              @selection-change="rightSelectionChange" size="small" :data="rightData" style="width: 100%" height="400">
               <el-table-column type="selection" width="45"></el-table-column>
               <el-table-column v-for="item in columnDate" v-bind:key="item.id" :fixed="item.fixed" :prop="item.prop" :label="item.label" :width="item.width">
-                <template slot-scope="scope">
+                <template v-slot="scope">
                   <slot :name="item.prop" v-if="item.custom" :data="scope['row']"></slot>
                   <div v-else>{{scope.row[''+item.prop]}}</div>
                 </template>
@@ -91,7 +91,9 @@
   </div>
 </template>
 <script>
-  export default {
+  import {watch,ref,reactive,defineComponent} from 'vue'
+  // import {ElMessage} from 'element-plus'
+  export default defineComponent({
     name: 'q-transfer',
     props:{
       columnDate:{type:Array},//表数据列的渲染
@@ -102,118 +104,112 @@
       lTotalPage:{type:Number},//接收总数据
       pageSize:{type:Number,default:100}
     },
-    watch: {
-      leftData: {
-          handler(newValue){
-             this.leftData1 = newValue
-          },
-          deep:true
-      },
-      rightData: {
-        handler(newValue){
-
-          this.rightData1 = newValue
-        },
-        deep:true
-      },
-      rTotalPage: {
-        handler(newValue){
-          console.log(newValue)
-          this.rTotalPage = newValue
-        },
-        deep:true
-      },
-      lTotalPage: {
-        handler(newValue){
-          console.log(newValue)
-          this.lTotalPage = newValue
-        },
-        deep:true
-      },
-      pageSize: {
-        handler(newValue){
-          this.pageSize = newValue
-        },
-        deep:true
-      }
-    },
-    data(){
-      return {
-        leftData1:[],//左边数据
-        rightData1:[],//右边数据
-        leftDataIng:[],//左边已选数据
-        rightDataIng:[],//右边已选数据
-        rightSearchValue:'',
-        leftSearchValue:'',
-        leftSelectValue:'',
-        rightSelectValue:'',
-      }
-    },
-    mounted(){
-      this.leftData1 = this.leftData
-      this.rightData1 = this.rightData
-    },
-    methods:{
+    setup(props,context){
+      const state = reactive({
+          rightDataIng:[],
+          leftDataIng:[],
+          leftSearchValue:'',
+          rightSearchValue:'',
+          leftSelectValue:'',
+          rightSelectValue:''
+      });
       //分页事件
-      leftCurrentChangeHandle(val){
-        this.$emit('page-change', val,'left');
-      },
+      const leftCurrentChangeHandle = (val)=>{
+        context.emit('page-change', val,'left');
+      };
       //分页事件
-      rightCurrentChangeHandle(val){
-        this.$emit('page-change', val,'right');
-      },
+      const  rightCurrentChangeHandle =(val)=>{
+        context.emit('page-change', val,'right');
+      };
       //左边表格数据选择
-      leftSelectionChange(val){
-        this.leftDataIng  = val
-      },
+      const leftSelectionChange = (val)=>{
+          state.leftDataIng = val
+      };
       //左边点击某行选中数据
-      lToggleSelection(rows) {
+      const lMultipleTable = ref(null);
+      const lToggleSelection = (rows) =>{
         if (rows) {
-          this.$refs.lMultipleTable.toggleRowSelection(rows);
+          lMultipleTable.value.toggleRowSelection(rows);
         } else {
-          this.$refs.lMultipleTable.clearSelection();
+          lMultipleTable.value.clearSelection();
         }
-      },
+      };
       //右边表格数据选择
-      rightSelectionChange(val){
-        this.rightDataIng  = val
-      },
+      const rightSelectionChange = (val)=>{
+          state.rightDataIng  = val
+      };
       //右边点击某行选中数据
-      rToggleSelection(rows) {
+      const rMultipleTable = ref(null);
+      const rToggleSelection = (rows) =>{
         if (rows) {
-          this.$refs.rMultipleTable.toggleRowSelection(rows);
+          rMultipleTable.value.toggleRowSelection(rows);
         } else {
-          this.$refs.rMultipleTable.clearSelection();
+          rMultipleTable.value.clearSelection();
         }
-      },
-      //从右到左事件
-      rightToLeft(){
-        let rIng = this.rightDataIng;
-        this.$emit('data-change',rIng,'right-to-left')
-      },
+      };
+      /**从右到左事件*/
+      const rightToLeft = ()=>{
+          if (state.rightDataIng.length > 0) {
+              context.emit('data-change',JSON.parse(JSON.stringify(state.rightDataIng)),'right-to-left')
+          } else {
+              // ElMessage.error('请选择数据')
+          }
+      };
       //从左到右事件
-      leftToRight(){
-        let lIng = this.leftDataIng;
-        this.$emit('data-change',lIng,'left-to-right')
-      },
+      const leftToRight= ()=>{
+          if (state.leftDataIng.length > 0) {
+              context.emit('data-change',JSON.parse(JSON.stringify(state.leftDataIng)),'left-to-right')
+          } else {
+              // ElMessage.error('请选择数据')
+          }
+      };
       //左边下拉框选择事件
-      leftSelectChange (val) {
-        this.$emit('select-input-search',val,this.leftSearchValue,'left')
-      },
+      const leftSelectChange = (val) =>{
+        context.emit('select-input-search',val,state.leftSearchValue,'left')
+      };
       //右边下拉框选择事件
-      rightSelectChange (val) {
-        this.$emit('select-input-search',val,this.rightSearchValue,'right')
-      },
+      const rightSelectChange = (val) =>{
+        context.emit('select-input-search',val,state.rightSearchValue,'right')
+      };
       //左边输入框change事件
-      leftInputSearch (val) {
-        this.$emit('select-input-search',this.leftSelectValue,val,'left')
-      },
+      const leftInputSearch = (val) =>{
+        context.emit('select-input-search',state.leftSelectValue,val,'left')
+      };
       //右边输入框change事件
-      rightInputSearch (val) {
-        this.$emit('select-input-search',this.rightSelectValue,val,'right')
+      const rightInputSearch = (val) =>{
+        context.emit('select-input-search',state.rightSelectValue,val,'right')
+      };
+
+      watch(()=>props.rTotalPage,(val,old)=>{
+        console.log("------",val,old)
+      });
+      watch(()=>props.lTotalPage,(val)=>{
+        context.lTotalPage = val
+      });
+      watch(()=>props.pageSize,(val)=>{
+        context.pageSize = val
+      });
+
+      return {
+        state,
+        rMultipleTable,
+        lMultipleTable,
+
+        leftCurrentChangeHandle,
+        rightCurrentChangeHandle,
+        leftSelectionChange,
+        lToggleSelection,
+        rightSelectionChange,
+        rToggleSelection,
+        rightToLeft,
+        leftToRight,
+        leftSelectChange,
+        rightSelectChange,
+        leftInputSearch,
+        rightInputSearch
       }
     }
-  }
+  })
 </script>
 
 <style scoped>

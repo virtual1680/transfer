@@ -1,22 +1,36 @@
 # q-transfer
 
 ### Project setup
-基于element-ui,自定义穿梭框，带下拉，输入框搜索分页
+基于element-ui,自定义穿梭框，带下拉，输入框搜索分页（vue2.0）
+基于1.1.3 支持vue3.0 element-plus,自定义穿梭框，带下拉，输入框搜索分页
 
 ###安装
 npm https://www.npmjs.com/package/q-transfer
 ```
+vue2.0
 npm install element-ui
 npm install q-transfer
+vue3.0
+npm install element-plus
+npm install q-transfer
+
 ```
 ###使用
 ```
-main.js
+main.js  vue2.0
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import QTransfer from 'q-transfer';
 Vue.use(ElementUI);
 Vue.use(QTransfer);
+
+main.js  vue3.0
+import ElementPlus from 'element-plus';
+import 'element-plus/lib/theme-chalk/index.css';
+import QTransfer from 'q-transfer';
+const app = createApp(App);
+app.use(ElementPlus);
+app.use(qTransfer);
 
 //简单使用
 <q-transfer
