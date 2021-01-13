@@ -1,9 +1,9 @@
 # q-transfer
 
 ### Project setup
-####基于element-ui,自定义穿梭框，带下拉，输入框搜索分页
-####基于1.1.3 支持vue3.0 element-plus,自定义穿梭框，带下拉，输入框搜索分页
-####vue2.0建议使用1.1.2
+###基于element-ui,自定义穿梭框，带下拉，输入框搜索分页
+###基于1.1.3 支持vue3.0 element-plus,自定义穿梭框，带下拉，输入框搜索分页
+###vue2.0建议使用1.1.2
 ###安装
 npm https://www.npmjs.com/package/q-transfer
 ```
